@@ -9,7 +9,7 @@ import About from './Components/About';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/portfolio">  {/* Only use BrowserRouter here */}
+    <BrowserRouter>  {/* Only use BrowserRouter here */}
       <Navbar />  {/* Display Navbar on every page */}
       <Routes>
         <Route path="/" element={<Home />} />
