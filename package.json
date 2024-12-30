@@ -1,7 +1,5 @@
 {
-  "homepage": "https://ajithks32.github.io/portfolio",
-
-
+  "homepage": "https://ajithks32.github.io/portfolio/",
   "name": "react-portfolio",
   "private": true,
   "version": "0.0.0",
@@ -11,8 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-     "predeploy": "npm run build",
-     "deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
