@@ -24,8 +24,8 @@ const Navbar = () => {
             <ListItem button component={Link} to="/projects">
                 <ListItemText primary="Projects" />
             </ListItem>
-            <ListItem button component={Link} to="/skills">
-                <ListItemText primary="Skills" />
+            <ListItem button component={Link} to="/skill">
+                <ListItemText primary="skill" />
             </ListItem>
             <ListItem button component={Link} to="/resume">
                 <ListItemText primary="Resume" />
@@ -81,7 +81,7 @@ const Navbar = () => {
                         <Button
                             color="inherit"
                             component={Link}
-                            to="/#skills"
+                            to="/skill"
                             sx={{ fontFamily: 'Poppins, sans-serif' }}
                         >
                             Skills
