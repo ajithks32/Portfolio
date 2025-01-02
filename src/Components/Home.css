@@ -1,0 +1,132 @@
+/* General Styling */
+body {
+    background-color: black;
+}
+
+
+.home-container {
+    height: 82vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black !important;
+    padding: 20px 40px;
+    margin-top: 64px; /* Adjust this value to match the height of the navbar */
+    box-sizing: border-box;
+    overflow: hidden;
+    background: url("opcatitychange.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.home-title {
+    font-family: 'Montserrat, sans-serif';
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+    font-size: 3rem;
+    line-height: 1.2;
+    word-wrap: break-word; /* Ensure the title wraps on smaller screens */
+    padding-top: 100px;
+}
+
+.home-subtitle {
+    font-family: 'Poppins, sans-serif';
+    color: #555;
+    margin-bottom: 32px;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.home-button {
+    font-family: 'Poppins, sans-serif';
+    font-weight: bold;
+    text-transform: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #0078d4;
+    color: white;
+    transition: all 0.3s ease;
+    margin-bottom: 40px;
+}
+
+.home-button:hover {
+    background-color: #005bb5;
+}
+
+.home-grid {
+    margin-top: 40px;
+}
+
+.home-feature-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.home-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.feature-title {
+    font-family: 'Montserrat, sans-serif';
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.feature-description {
+    font-family: 'Poppins, sans-serif';
+    color: #555;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Responsiveness for Mobile */
+@media (max-width: 768px) {
+    .home-title {
+        font-size: 2rem;
+        margin: 10px auto; /* Center align */
+        text-align: center;
+    }
+
+    .home-subtitle {
+        font-size: 1rem;
+        margin: 10px auto;
+        text-align: center;
+    }
+    .viewprojectbutton{
+        text-align: center !important;
+        margin: 20px 0px;
+    }
+    
+    .home-button {
+        padding: 10px 20px;
+        margin: 20px auto; /* Center the button */
+        display: block; /* Ensure the button appears as a block-level element */
+        text-align: center; /* Align text to center */
+        width: fit-content; /* Adjust the width for better alignment */
+    }
+
+    .home-container {
+        padding: 20px 10px; /* Reduce padding to create more space */
+        height: auto; /* Allow the container to adjust height dynamically */
+    }
+
+    .home-grid {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .home-feature-card {
+        padding: 15px;
+        margin-bottom: 15px;
+        width: 90%; /* Ensure proper sizing */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

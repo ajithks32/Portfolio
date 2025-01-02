@@ -1,159 +1,126 @@
-import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Grid } from '@mui/material';
-import '@fontsource/montserrat';
-import '@fontsource/poppins';
-import emailjs from 'emailjs-com'; // Import EmailJS SDK
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import emailjs from 'emailjs-com';
+import './Contact.css';  // External CSS for background and form styling
+import Footer from './Footer';
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        user_name: '',
-        user_email: '',
-        user_message: '',
-    });
+  const formik = useFormik({
+    initialValues: {
+      user_name: '',
+      user_email: '',
+      user_message: '',
+    },
+    validationSchema: Yup.object({
+      user_name: Yup.string()
+        .min(2, 'Name must be at least 2 characters long')
+        .required('Name is required'),
+      user_email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      user_message: Yup.string()
+        .min(10, 'Message must be at least 10 characters long')
+        .required('Message is required'),
+    }),
+    onSubmit: (values, { resetForm, setSubmitting, setStatus }) => {
+      emailjs
+        .send(
+          'service_ychg6bg', // Replace with your service ID
+          'template_lt092ss', // Replace with your template ID
+          values,
+          'M5i5Eq_N1JTAfTTAV' // Replace with your user ID
+        )
+        .then(
+          () => {
+            setStatus({ success: true });
+            alert('Message sent successfully!');
+            resetForm();
+            setSubmitting(false);
+          },
+          (error) => {
+            console.error('Error sending email:', error);
+            setStatus({ success: false });
+            setSubmitting(false);
+          }
+        );
+    },
+  });
 
-    const [feedback, setFeedback] = useState(''); // Feedback message state
+  return (
+    <>
+      <div id="contact" className="container-fluid">
+      <div className="row">
+        {/* Background Image Section */}
+        <div className="col-12 d-flex  align-items-center contact-background">
+          <div className="contact-form-wrapper">
+            <h2 className="text-center text-white">Get in Touch</h2>
+            <p className="text-center text-white">I would love to hear from you! Let’s collaborate or discuss your ideas.</p>
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+            {/* Form */}
+            <form onSubmit={formik.handleSubmit}>
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label htmlFor="user_name" className="form-label">Name</label>
+                  <input
+                    type="text"
+                    id="user_name"
+                    name="user_name"
+                    className={`form-control ${formik.touched.user_name && formik.errors.user_name ? 'is-invalid' : ''}`}
+                    value={formik.values.user_name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.user_name && formik.errors.user_name && (
+                    <div className="invalid-feedback">{formik.errors.user_name}</div>
+                  )}
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="user_email" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="user_email"
+                    name="user_email"
+                    className={`form-control ${formik.touched.user_email && formik.errors.user_email ? 'is-invalid' : ''}`}
+                    value={formik.values.user_email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.user_email && formik.errors.user_email && (
+                    <div className="invalid-feedback">{formik.errors.user_email}</div>
+                  )}
+                </div>
+              </div>
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+              <div className="mb-3">
+                <label htmlFor="user_message" className="form-label">Message</label>
+                <textarea
+                  id="user_message"
+                  name="user_message"
+                  className={`form-control ${formik.touched.user_message && formik.errors.user_message ? 'is-invalid' : ''}`}
+                  rows="4"
+                  value={formik.values.user_message}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.user_message && formik.errors.user_message && (
+                  <div className="invalid-feedback">{formik.errors.user_message}</div>
+                )}
+              </div>
 
-        emailjs
-            .sendForm(
-                'service_ychg6bg', // Replace with your service ID
-                'template_lt092ss', // Replace with your template ID
-                e.target, // The form element
-                'M5i5Eq_N1JTAfTTAV' // Replace with your user ID
-            )
-            .then(
-                (result) => {
-                    console.log('Email sent:', result);
-                    setFeedback('Message sent successfully!');
-                    setFormData({ user_name: '', user_email: '', user_message: '' }); // Reset form
-                },
-                (error) => {
-                    console.error('Error sending email:', error);
-                    setFeedback('An error occurred, please try again.');
-                }
-            );
-    };
-
-    return (
-        <Box
-            id="contact"
-            sx={{
-                padding: { xs: 2, sm: 4 },
-                backgroundColor: '#f5f5f5',
-                minHeight: 'calc(100vh - 64px)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                textAlign: 'center',
-                marginTop: { xs: '64px', sm: '0' },
-            }}
-        >
-            <Typography
-                variant="h4"
-                sx={{
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 'bold',
-                    marginBottom: 2,
-                    fontSize: { xs: '1.5rem', sm: '2.5rem' },
-                    textAlign: 'center',
-                }}
-            >
-                Get in Touch
-            </Typography>
-
-            <Typography
-                variant="h6"
-                sx={{
-                    fontFamily: 'Poppins, sans-serif',
-                    marginBottom: 4,
-                    color: '#555',
-                    fontSize: { xs: '1rem', sm: '1.25rem' },
-                    textAlign: 'center',
-                    maxWidth: '600px',
-                    margin: '0 auto',
-                }}
-            >
-                I would love to hear from you! Please reach out if you have any questions or want to collaborate.
-            </Typography>
-
-            {/* Contact Form */}
-            <form onSubmit={handleSubmit}>
-                <Grid container spacing={3} justifyContent="center" sx={{ maxWidth: '600px', width: '100%' }}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            label="Name"
-                            variant="outlined"
-                            fullWidth
-                            name="user_name"
-                            value={formData.user_name}
-                            onChange={handleChange}
-                            sx={{ marginBottom: 2 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            label="Email"
-                            variant="outlined"
-                            fullWidth
-                            name="user_email"
-                            value={formData.user_email}
-                            onChange={handleChange}
-                            sx={{ marginBottom: 2 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Message"
-                            variant="outlined"
-                            fullWidth
-                            name="user_message"
-                            value={formData.user_message}
-                            onChange={handleChange}
-                            multiline
-                            rows={4}
-                            sx={{ marginBottom: 2 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{
-                                fontFamily: 'Poppins, sans-serif',
-                                padding: '10px 20px',
-                                borderRadius: '20px',
-                            }}
-                            type="submit"
-                        >
-                            Send Message
-                        </Button>
-                    </Grid>
-                </Grid>
+              <button type="submit" className="btn btn-primary w-100" disabled={formik.isSubmitting}>
+                {formik.isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
             </form>
-
-            {/* Feedback Message */}
-            {feedback && (
-                <Typography
-                    variant="body1"
-                    color={feedback.includes('error') ? 'error' : 'primary'}
-                    sx={{ marginTop: 2 }}
-                >
-                    {feedback}
-                </Typography>
-            )}
-        </Box>
-    );
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <Footer/>
+    </>
+  
+  );
 };
 
 export default Contact;

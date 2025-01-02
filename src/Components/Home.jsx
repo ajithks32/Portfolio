@@ -1,68 +1,72 @@
 import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
+import { Box, Typography, Button, Container, Grid } from '@mui/material';
 import '@fontsource/montserrat';
 import '@fontsource/poppins';
+import './Home.css'; // Import external CSS
+import Footer from './Footer';
 
 const Home = () => {
     return (
-        <Box
-            sx={{
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                textAlign: 'center',
-                backgroundColor: '#f5f5f5',
-                padding: { xs: 2, sm: 3 }, // Padding adapts on mobile and larger screens
-            }}
-            id="home"
-        >
+        <>
+         <Box className="home-container" id="home">
             <Container>
                 {/* Welcome Text */}
-                <Typography
-                    variant="h2"
-                    sx={{
-                        fontFamily: 'Montserrat, sans-serif',
-                        fontWeight: 'bold',
-                        color: '#333',
-                        marginBottom: 2,
-                        fontSize: { xs: '2rem', sm: '3rem' }, // Responsive font size
-                    }}
-                >
-                    Welcome to My Portfolio
+                <Typography variant="h2" className="home-title text-white mb-lg-3">
+             Ajith S
                 </Typography>
 
                 {/* Subtitle */}
-                <Typography
-                    variant="h6"
-                    sx={{
-                        fontFamily: 'Poppins, sans-serif',
-                        color: '#555',
-                        marginBottom: 4,
-                        fontSize: { xs: '1rem', sm: '1.25rem' }, // Responsive font size
-                    }}
-                >
+                <Typography variant="h6" className="home-subtitle text-white mb-lg-3">
                     I'm a passionate Front-End Developer who loves crafting beautiful and functional user experiences.
                 </Typography>
 
                 {/* Call to Action */}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    href="#projects"
-                    sx={{
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 'bold',
-                        textTransform: 'none',
-                        padding: { xs: '8px 16px', sm: '10px 20px' }, // Responsive padding
-                        borderRadius: '20px',
-                    }}
-                >
+                <div className='viewprojectbutton '>
+                <Button variant="contained" href="#projects" className="home-button mb-lg-4 ">
                     View My Projects
                 </Button>
+                </div>
+                
+
+                {/* Additional Content */}
+                <Grid container spacing={4} className="home-grid" justifyContent="center">
+                    <Grid item xs={12} sm={4}>
+                        <div className="home-feature-card">
+                            <Typography variant="h6" className="feature-title">
+                                Creative Designs
+                            </Typography>
+                            <Typography variant="body2" className="feature-description">
+                                I focus on crafting visually stunning and intuitive user interfaces.
+                            </Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <div className="home-feature-card">
+                            <Typography variant="h6" className="feature-title">
+                                Responsive Layouts
+                            </Typography>
+                            <Typography variant="body2" className="feature-description">
+                                My designs adapt seamlessly to all devices and screen sizes.
+                            </Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <div className="home-feature-card">
+                            <Typography variant="h6" className="feature-title">
+                                Performance-Driven
+                            </Typography>
+                            <Typography variant="body2" className="feature-description">
+                                Optimized for speed and efficiency to ensure a smooth user experience.
+                            </Typography>
+                        </div>
+                    </Grid>
+                </Grid>
             </Container>
+           
         </Box>
+        <Footer/>
+        </>
+       
     );
 };
 

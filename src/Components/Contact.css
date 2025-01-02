@@ -1,0 +1,77 @@
+/* Full Background for the Contact Form */
+#contact {
+    background: url("opcatitychange.jpg") no-repeat center center;
+    background-size: cover;
+    min-height: 80vh;
+    position: relative;
+    padding-left: 50px;
+    margin-top: 64px;
+  }
+  
+  .contact-background {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Form Wrapper Styling */
+  .contact-form-wrapper {
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    
+  }
+  
+  .contact-form-wrapper input,
+  .contact-form-wrapper textarea {
+    background-color: transparent;  /* Ensure background color */
+    border: 1px solid #ccc;  /* Light border */
+    border-radius: 4px;
+    padding: 12px;
+    width: 100%;
+    color: white; /* Dark text for contrast */
+  }
+  
+  /* Input & Textarea focus state */
+  .contact-form-wrapper input:focus,
+  .contact-form-wrapper textarea:focus {
+    background-color: transparent;  /* Light blue background on focus */
+    border-color: #0078d4;  /* Blue border on focus */
+    outline: none;  /* Remove default focus outline */
+    color: white;
+  }
+  
+  h2,
+  p {
+    color: white;
+  }
+  
+
+  
+  .form-label {
+    font-weight: 600;
+    color: white;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
+  /* Custom Invalid Input Styling */
+  .is-invalid {
+    border-color: red !important;
+  }
+  
+  .invalid-feedback {
+    display: block;
+    color: red;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .contact-form-wrapper {
+      padding: 20px;
+    }
+  }
+  
